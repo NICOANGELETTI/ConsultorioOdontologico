@@ -4,6 +4,7 @@ logica\Persona.class
 logica\Secretario_.class
 logica\Turno.class
 persistencia\UsuarioJpaController.class
+servlet\SvElimUsuarios.class
 logica\Paciente_.class
 persistencia\ResponsableJpaController.class
 persistencia\OdontologoJpaController.class
@@ -16,6 +17,7 @@ servlet\SvUsuarios.class
 persistencia\SecretarioJpaController.class
 logica\Odontologo.class
 logica\Responsable_.class
+servlet\SvEditUsuarios.class
 persistencia\HorarioJpaController.class
 logica\Paciente.class
 logica\Horario.class

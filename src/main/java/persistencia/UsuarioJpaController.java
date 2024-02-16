@@ -50,20 +50,14 @@ public class UsuarioJpaController implements Serializable {
             }
         }
     }
-
-    public void edit(Usuario usuario) throws NonexistentEntityException, RollbackFailureException, Exception {
+ public void edit(Usuario usuario) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             usuario = em.merge(usuario);
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 int id = usuario.getId_usuario();
@@ -79,11 +73,11 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public void destroy(int id) throws NonexistentEntityException, RollbackFailureException, Exception {
+  public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             Usuario usuario;
             try {
                 usuario = em.getReference(Usuario.class, id);
@@ -92,20 +86,14 @@ public class UsuarioJpaController implements Serializable {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
             }
             em.remove(usuario);
-            utx.commit();
-        } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            throw ex;
+            em.getTransaction().commit();
         } finally {
             if (em != null) {
                 em.close();
             }
         }
     }
+
 
     public List<Usuario> findUsuarioEntities() {
         return findUsuarioEntities(true, -1, -1);
