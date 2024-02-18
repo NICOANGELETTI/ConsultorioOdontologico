@@ -5,9 +5,11 @@ package persistencia;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logica.Odontologo;
+import logica.Paciente;
+import logica.Turno;
 import logica.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
-import persistencia.exceptions.RollbackFailureException;
 
 
 public class ControladoraPersistencia {
@@ -18,10 +20,11 @@ public class ControladoraPersistencia {
     
     
     UsuarioJpaController usuJPA = new UsuarioJpaController();
-    
-    
-    
-    
+    OdontologoJpaController odoJPA = new OdontologoJpaController();
+    PacienteJpaController paciJPA = new PacienteJpaController();
+    TurnoJpaController turnoJPA = new TurnoJpaController();
+
+
     
     public ControladoraPersistencia() {
     }
@@ -67,11 +70,59 @@ public class ControladoraPersistencia {
         
     }
 
+        //Metodos Odontologo
+    public void crearOdontologo(Odontologo odontologo) {
+       odoJPA.create(odontologo);
+    }
+
+    public List<Odontologo> traerOdontologos() {
+
+        return odoJPA.findOdontologoEntities();
+    }
+  public Odontologo traerOdontologo(int id) {
+        return odoJPA.findOdontologo(id);
+
+    }
+    
+    //Metodos Paciente
+    public void crearPaciente(Paciente paciente) {
+  
+            paciJPA.create(paciente);
+       
+    }
+
+    public List<Paciente> traerPacientes() {
+
+        return paciJPA.findPacienteEntities();
+    }
+
+    public Paciente traerPaciente(int id) {
+
+        return paciJPA.findPaciente(id);
+    }
+
+    public void crearTurno(Turno turno) {
+        try {
+            turnoJPA.create(turno);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+  
+       
+     
+      
+        
+
+    }
+
+
+    
 
     
     
     
     
-    
-    
-}
+

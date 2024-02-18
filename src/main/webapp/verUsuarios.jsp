@@ -12,8 +12,7 @@
   <div class="container text-center"> <!-- Agregar el contenedor y la clase para centrar -->
   <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Ver Usuarios</h1>
-                    <p class="mb-4">Acontinuacion estara la lista de usuarios<a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <p class="mb-4">A continuacion estara la lista de usuarios</p>
 
                   <!-- DataTales Example -->
 <div class="card shadow mb-4">

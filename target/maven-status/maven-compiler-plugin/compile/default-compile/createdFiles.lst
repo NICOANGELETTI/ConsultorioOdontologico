@@ -1,6 +1,7 @@
 logica\Odontologo_.class
 logica\Usuario.class
 logica\Persona.class
+servlet\SvLogin.class
 logica\Secretario_.class
 logica\Turno.class
 persistencia\UsuarioJpaController.class
@@ -8,6 +9,7 @@ servlet\SvElimUsuarios.class
 logica\Paciente_.class
 persistencia\ResponsableJpaController.class
 persistencia\OdontologoJpaController.class
+servlet\SvOdontologos.class
 persistencia\exceptions\RollbackFailureException.class
 logica\Turno_.class
 persistencia\exceptions\PreexistingEntityException.class
@@ -15,6 +17,7 @@ persistencia\ControladoraPersistencia.class
 persistencia\exceptions\IllegalOrphanException.class
 servlet\SvUsuarios.class
 persistencia\SecretarioJpaController.class
+servlet\SvPacientes.class
 logica\Odontologo.class
 logica\Responsable_.class
 servlet\SvEditUsuarios.class
@@ -23,6 +26,7 @@ logica\Paciente.class
 logica\Horario.class
 logica\Controladora.class
 logica\Usuario_.class
+servlet\SvTurnos.class
 logica\Persona_.class
 logica\Secretario.class
 logica\Horario_.class

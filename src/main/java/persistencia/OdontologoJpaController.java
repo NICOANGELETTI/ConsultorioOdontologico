@@ -39,44 +39,62 @@ public class OdontologoJpaController implements Serializable {
   public  OdontologoJpaController(){
         emf = Persistence.createEntityManagerFactory("ConsultorioOdontologiaFinal_PU");
     }
-    public void create(Odontologo odontologo) throws RollbackFailureException, Exception {
-        if (odontologo.getListaTurnos() == null) {
-            odontologo.setListaTurnos(new ArrayList<Turno>());
-        }
+  
+  
+  
+  
+  
+      public void create(Odontologo odontologo) {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
-            List<Turno> attachedListaTurnos = new ArrayList<Turno>();
-            for (Turno listaTurnosTurnoToAttach : odontologo.getListaTurnos()) {
-                listaTurnosTurnoToAttach = em.getReference(listaTurnosTurnoToAttach.getClass(), listaTurnosTurnoToAttach.getId_turno());
-                attachedListaTurnos.add(listaTurnosTurnoToAttach);
-            }
-            odontologo.setListaTurnos(attachedListaTurnos);
+            em.getTransaction().begin();
             em.persist(odontologo);
-            for (Turno listaTurnosTurno : odontologo.getListaTurnos()) {
-                Odontologo oldOdontoOfListaTurnosTurno = listaTurnosTurno.getOdonto();
-                listaTurnosTurno.setOdonto(odontologo);
-                listaTurnosTurno = em.merge(listaTurnosTurno);
-                if (oldOdontoOfListaTurnosTurno != null) {
-                    oldOdontoOfListaTurnosTurno.getListaTurnos().remove(listaTurnosTurno);
-                    oldOdontoOfListaTurnosTurno = em.merge(oldOdontoOfListaTurnosTurno);
-                }
-            }
-            utx.commit();
-        } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            throw ex;
+            em.getTransaction().commit();
         } finally {
             if (em != null) {
                 em.close();
             }
         }
     }
+//    public void create(Odontologo odontologo) throws RollbackFailureException, Exception {
+//        if (odontologo.getListaTurnos() == null) {
+//            odontologo.setListaTurnos(new ArrayList<Turno>());
+//        }
+//        EntityManager em = null;
+//        try {
+//            utx.begin();
+//            em = getEntityManager();
+//            List<Turno> attachedListaTurnos = new ArrayList<Turno>();
+//            for (Turno listaTurnosTurnoToAttach : odontologo.getListaTurnos()) {
+//                listaTurnosTurnoToAttach = em.getReference(listaTurnosTurnoToAttach.getClass(), listaTurnosTurnoToAttach.getId_turno());
+//                attachedListaTurnos.add(listaTurnosTurnoToAttach);
+//            }
+//            odontologo.setListaTurnos(attachedListaTurnos);
+//            em.persist(odontologo);
+//            for (Turno listaTurnosTurno : odontologo.getListaTurnos()) {
+//                Odontologo oldOdontoOfListaTurnosTurno = listaTurnosTurno.getOdonto();
+//                listaTurnosTurno.setOdonto(odontologo);
+//                listaTurnosTurno = em.merge(listaTurnosTurno);
+//                if (oldOdontoOfListaTurnosTurno != null) {
+//                    oldOdontoOfListaTurnosTurno.getListaTurnos().remove(listaTurnosTurno);
+//                    oldOdontoOfListaTurnosTurno = em.merge(oldOdontoOfListaTurnosTurno);
+//                }
+//            }
+//            utx.commit();
+//        } catch (Exception ex) {
+//            try {
+//                utx.rollback();
+//            } catch (Exception re) {
+//                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+//            }
+//            throw ex;
+//        } finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
+//    }
 
     public void edit(Odontologo odontologo) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;

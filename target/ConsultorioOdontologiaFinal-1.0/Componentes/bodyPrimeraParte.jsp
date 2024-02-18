@@ -6,6 +6,15 @@
 
 
 
+    <%   HttpSession sesion = request.getSession(); 
+        String usuario = (String) sesion.getAttribute("nombreUsuario");
+         if(usuario == null){
+         response.sendRedirect("loginError.jsp");
+        }
+    
+    %>
+    
+    
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -51,8 +60,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones: </h6>
-                        <a class="collapse-item" href="buttons.html">Ver Odontologos</a>
-                        <a class="collapse-item" href="altasOdontologo.jsp">Alta Odontologos</a>
+                        <a class="collapse-item" href="SvOdontologos">Ver Odontologos</a>
+                        <a class="collapse-item" href="altasOdontologos.jsp">Alta Odontologos</a>
 
                     </div>
                 </div>
@@ -68,8 +77,8 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones: </h6>
-                        <a class="collapse-item" href="utilities-color.html">Ver Pacientes</a>
-                        <a class="collapse-item" href="utilities-border.html">Alta Pacientes</a>
+                        <a class="collapse-item" href="SvPacientes">Ver Pacientes</a>
+                        <a class="collapse-item" href="altaPacientes.jsp">Alta Pacientes</a>
 
                     </div>
                 </div>
@@ -90,6 +99,25 @@
                         <h6 class="collapse-header">Acciones: </h6>
                         <a class="collapse-item" href="SvUsuarios">Ver Usuarios</a>
                         <a class="collapse-item" href="altaUsuarios.jsp">Alta Usuarios</a>
+
+                    </div>
+                </div>
+            </li>
+
+            
+            
+                  <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTurnos"
+                   aria-expanded="true" aria-controls="collapseTurnos">
+                    <i class="fas fa-solid fa-notes-medical"></i>             <span>Turnos</span>
+                </a>
+                <div id="collapseTurnos" class="collapse" aria-labelledby="headingUtilities"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones: </h6>
+                        <a class="collapse-item" href="SvTurnos">Ver Turnos</a>
+                        <a class="collapse-item" href="altaTurnos.jsp">Alta Turnos</a>
 
                     </div>
                 </div>
@@ -131,7 +159,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= usuario %></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>

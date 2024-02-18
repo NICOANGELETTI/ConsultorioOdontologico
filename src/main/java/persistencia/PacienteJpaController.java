@@ -39,44 +39,59 @@ public class PacienteJpaController implements Serializable {
   public  PacienteJpaController(){
         emf = Persistence.createEntityManagerFactory("ConsultorioOdontologiaFinal_PU");
     }
-    public void create(Paciente paciente) throws RollbackFailureException, Exception {
-        if (paciente.getListaTurnos() == null) {
-            paciente.setListaTurnos(new ArrayList<Turno>());
-        }
+      public void create(Paciente paciente) {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
-            List<Turno> attachedListaTurnos = new ArrayList<Turno>();
-            for (Turno listaTurnosTurnoToAttach : paciente.getListaTurnos()) {
-                listaTurnosTurnoToAttach = em.getReference(listaTurnosTurnoToAttach.getClass(), listaTurnosTurnoToAttach.getId_turno());
-                attachedListaTurnos.add(listaTurnosTurnoToAttach);
-            }
-            paciente.setListaTurnos(attachedListaTurnos);
+            em.getTransaction().begin();
             em.persist(paciente);
-            for (Turno listaTurnosTurno : paciente.getListaTurnos()) {
-                Paciente oldPacienteOfListaTurnosTurno = listaTurnosTurno.getPaciente();
-                listaTurnosTurno.setPaciente(paciente);
-                listaTurnosTurno = em.merge(listaTurnosTurno);
-                if (oldPacienteOfListaTurnosTurno != null) {
-                    oldPacienteOfListaTurnosTurno.getListaTurnos().remove(listaTurnosTurno);
-                    oldPacienteOfListaTurnosTurno = em.merge(oldPacienteOfListaTurnosTurno);
-                }
-            }
-            utx.commit();
-        } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            throw ex;
+            em.getTransaction().commit();
         } finally {
             if (em != null) {
                 em.close();
             }
         }
     }
+  
+  
+//    public void create(Paciente paciente) throws RollbackFailureException, Exception {
+//        if (paciente.getListaTurnos() == null) {
+//            paciente.setListaTurnos(new ArrayList<Turno>());
+//        }
+//        EntityManager em = null;
+//        try {
+//            utx.begin();
+//            em = getEntityManager();
+//            List<Turno> attachedListaTurnos = new ArrayList<Turno>();
+//            for (Turno listaTurnosTurnoToAttach : paciente.getListaTurnos()) {
+//                listaTurnosTurnoToAttach = em.getReference(listaTurnosTurnoToAttach.getClass(), listaTurnosTurnoToAttach.getId_turno());
+//                attachedListaTurnos.add(listaTurnosTurnoToAttach);
+//            }
+//            paciente.setListaTurnos(attachedListaTurnos);
+//            em.persist(paciente);
+//            for (Turno listaTurnosTurno : paciente.getListaTurnos()) {
+//                Paciente oldPacienteOfListaTurnosTurno = listaTurnosTurno.getPaciente();
+//                listaTurnosTurno.setPaciente(paciente);
+//                listaTurnosTurno = em.merge(listaTurnosTurno);
+//                if (oldPacienteOfListaTurnosTurno != null) {
+//                    oldPacienteOfListaTurnosTurno.getListaTurnos().remove(listaTurnosTurno);
+//                    oldPacienteOfListaTurnosTurno = em.merge(oldPacienteOfListaTurnosTurno);
+//                }
+//            }
+//            utx.commit();
+//        } catch (Exception ex) {
+//            try {
+//                utx.rollback();
+//            } catch (Exception re) {
+//                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+//            }
+//            throw ex;
+//        } finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
+//    }
 
     public void edit(Paciente paciente) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
