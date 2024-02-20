@@ -46,30 +46,13 @@ public class SvTurnos extends HttpServlet {
    
              processRequest(request, response);
              
-             HttpSession sesion = request.getSession();
+        
              
-//             List<Odontologo> listaOdontologos = new ArrayList<>();
-//             listaOdontologos = control.traerOdontologos();
-//            sesion.setAttribute("listaOdontologos", listaOdontologos);
-//
-//            List<Paciente> listaPacientes = new ArrayList<>();
-//            listaPacientes = control.traerPacientes();
-//        sesion.setAttribute("listaPacientes", listaPacientes);
+             //FECHA
+         String fechaTurnoString = request.getParameter("fechaTurno");
 
-        String fechaTurnoString = request.getParameter("fechaTurno");
-        String horaTurno = request.getParameter("horaTurno");
-        String afeccion = request.getParameter("afeccion");
-        int idOdontologo = Integer.parseInt(request.getParameter("odontologo"));
-        int idPaciente = Integer.parseInt(request.getParameter("paciente"));
-       
-    Odontologo odo = new Odontologo();
-    Paciente paci = new Paciente();
-        
-        odo = control.traerOdontologo(idOdontologo);
-         paci = control.traerPaciente(idPaciente);
-        
-        
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+         
+          SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         // Crear un objeto Date mediante el análisis del String
         Date fechaTurno = null;
@@ -78,10 +61,30 @@ public class SvTurnos extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(SvTurnos.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
+         
+
+        //HORA    
+        String horaTurno = request.getParameter("horaTurno");
+        
+            //AFECCION
+        String afeccion = request.getParameter("afeccion");
+      
+        
+            //ODONTOLOGO
+        int idOdontologo = Integer.parseInt(request.getParameter("odontologo"));
+        Odontologo odo = control.traerOdontologo(idOdontologo);
+        
+            //PACIENTE
+        int idPaciente = Integer.parseInt(request.getParameter("paciente"));
+        Paciente paci = control.traerPaciente(idPaciente);
+        
+        
+       
 
         
         control.crearTurno(fechaTurno , horaTurno , afeccion , odo , paci);
-        response.sendRedirect("index.html");
+        response.sendRedirect("index.jsp");
         
     }
 
