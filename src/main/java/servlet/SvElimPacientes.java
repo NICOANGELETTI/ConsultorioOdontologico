@@ -14,7 +14,7 @@ import logica.Controladora;
 @WebServlet(name = "SvElimPacientes", urlPatterns = {"/SvElimPacientes"})
 public class SvElimPacientes extends HttpServlet {
 
-   
+    Controladora control = new Controladora();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,11 +37,11 @@ public class SvElimPacientes extends HttpServlet {
         
         int idPaciente = Integer.parseInt(request.getParameter("id"));
         
-        Controladora control = new Controladora();
+       
         
         control.borrarPaciente(idPaciente);
         
-        response.sendRedirect("verPacientes.jsp");
+        response.sendRedirect("SvPacientes");
     }
 
    

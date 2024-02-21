@@ -96,46 +96,14 @@ public class OdontologoJpaController implements Serializable {
 //        }
 //    }
 
-    public void edit(Odontologo odontologo) throws NonexistentEntityException, RollbackFailureException, Exception {
+       public void edit(Odontologo odontologo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
-            Odontologo persistentOdontologo = em.find(Odontologo.class, odontologo.getId());
-            List<Turno> listaTurnosOld = persistentOdontologo.getListaTurnos();
-            List<Turno> listaTurnosNew = odontologo.getListaTurnos();
-            List<Turno> attachedListaTurnosNew = new ArrayList<Turno>();
-            for (Turno listaTurnosNewTurnoToAttach : listaTurnosNew) {
-                listaTurnosNewTurnoToAttach = em.getReference(listaTurnosNewTurnoToAttach.getClass(), listaTurnosNewTurnoToAttach.getId_turno());
-                attachedListaTurnosNew.add(listaTurnosNewTurnoToAttach);
-            }
-            listaTurnosNew = attachedListaTurnosNew;
-            odontologo.setListaTurnos(listaTurnosNew);
+            em.getTransaction().begin();
             odontologo = em.merge(odontologo);
-            for (Turno listaTurnosOldTurno : listaTurnosOld) {
-                if (!listaTurnosNew.contains(listaTurnosOldTurno)) {
-                    listaTurnosOldTurno.setOdonto(null);
-                    listaTurnosOldTurno = em.merge(listaTurnosOldTurno);
-                }
-            }
-            for (Turno listaTurnosNewTurno : listaTurnosNew) {
-                if (!listaTurnosOld.contains(listaTurnosNewTurno)) {
-                    Odontologo oldOdontoOfListaTurnosNewTurno = listaTurnosNewTurno.getOdonto();
-                    listaTurnosNewTurno.setOdonto(odontologo);
-                    listaTurnosNewTurno = em.merge(listaTurnosNewTurno);
-                    if (oldOdontoOfListaTurnosNewTurno != null && !oldOdontoOfListaTurnosNewTurno.equals(odontologo)) {
-                        oldOdontoOfListaTurnosNewTurno.getListaTurnos().remove(listaTurnosNewTurno);
-                        oldOdontoOfListaTurnosNewTurno = em.merge(oldOdontoOfListaTurnosNewTurno);
-                    }
-                }
-            }
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 int id = odontologo.getId();
@@ -151,11 +119,11 @@ public class OdontologoJpaController implements Serializable {
         }
     }
 
-    public void destroy(int id) throws NonexistentEntityException, RollbackFailureException, Exception {
+      public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             Odontologo odontologo;
             try {
                 odontologo = em.getReference(Odontologo.class, id);
@@ -163,20 +131,8 @@ public class OdontologoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The odontologo with id " + id + " no longer exists.", enfe);
             }
-            List<Turno> listaTurnos = odontologo.getListaTurnos();
-            for (Turno listaTurnosTurno : listaTurnos) {
-                listaTurnosTurno.setOdonto(null);
-                listaTurnosTurno = em.merge(listaTurnosTurno);
-            }
             em.remove(odontologo);
-            utx.commit();
-        } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            throw ex;
+            em.getTransaction().commit();
         } finally {
             if (em != null) {
                 em.close();

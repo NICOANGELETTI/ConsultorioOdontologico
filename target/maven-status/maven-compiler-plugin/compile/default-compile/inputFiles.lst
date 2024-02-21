@@ -1,6 +1,7 @@
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\persistencia\exceptions\IllegalOrphanException.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\persistencia\exceptions\RollbackFailureException.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvOdontologos.java
+C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvElimPacientes.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvPacientes.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\persistencia\SecretarioJpaController.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvElimUsuarios.java
@@ -11,8 +12,10 @@ C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\per
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\persistencia\ControladoraPersistencia.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\logica\Odontologo.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\logica\Usuario.java
+C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvEditOdontologos.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\persistencia\PacienteJpaController.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvLogin.java
+C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvElimTurno.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\logica\Controladora.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvUsuarios.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\persistencia\HorarioJpaController.java
@@ -23,7 +26,10 @@ C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\log
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\logica\Responsable.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\persistencia\exceptions\NonexistentEntityException.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\persistencia\OdontologoJpaController.java
+C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvEditTurno.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\logica\Paciente.java
+C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvEditPacientes.java
+C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvElimOdontologos.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\persistencia\UsuarioJpaController.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\servlet\SvTurnos.java
 C:\Users\nicoc\OneDrive\Escritorio\ConsultorioOdontologiaFinal\src\main\java\logica\Secretario.java

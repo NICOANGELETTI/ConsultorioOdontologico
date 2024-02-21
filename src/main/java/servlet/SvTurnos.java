@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import logica.Controladora;
 import logica.Odontologo;
 import logica.Paciente;
+import logica.Turno;
 
 
 @WebServlet(name = "SvTurnos", urlPatterns = {"/SvTurnos"})
@@ -38,6 +39,16 @@ public class SvTurnos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        List<Turno> listaTurnos = new ArrayList<>();
+        
+        listaTurnos = control.traerTurnos();
+        
+        HttpSession sesion = request.getSession();
+        sesion.setAttribute("listaTurnos", listaTurnos);
+        response.sendRedirect("verTurnos.jsp");
+        
+        
     }
 
     @Override

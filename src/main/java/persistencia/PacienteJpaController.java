@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.transaction.UserTransaction;
+import logica.Odontologo;
 import logica.Paciente;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.RollbackFailureException;
@@ -93,46 +94,14 @@ public class PacienteJpaController implements Serializable {
 //        }
 //    }
 
-    public void edit(Paciente paciente) throws NonexistentEntityException, RollbackFailureException, Exception {
+        public void edit(Paciente paciente) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
-            Paciente persistentPaciente = em.find(Paciente.class, paciente.getId());
-            List<Turno> listaTurnosOld = persistentPaciente.getListaTurnos();
-            List<Turno> listaTurnosNew = paciente.getListaTurnos();
-            List<Turno> attachedListaTurnosNew = new ArrayList<Turno>();
-            for (Turno listaTurnosNewTurnoToAttach : listaTurnosNew) {
-                listaTurnosNewTurnoToAttach = em.getReference(listaTurnosNewTurnoToAttach.getClass(), listaTurnosNewTurnoToAttach.getId_turno());
-                attachedListaTurnosNew.add(listaTurnosNewTurnoToAttach);
-            }
-            listaTurnosNew = attachedListaTurnosNew;
-            paciente.setListaTurnos(listaTurnosNew);
+            em.getTransaction().begin();
             paciente = em.merge(paciente);
-            for (Turno listaTurnosOldTurno : listaTurnosOld) {
-                if (!listaTurnosNew.contains(listaTurnosOldTurno)) {
-                    listaTurnosOldTurno.setPaciente(null);
-                    listaTurnosOldTurno = em.merge(listaTurnosOldTurno);
-                }
-            }
-            for (Turno listaTurnosNewTurno : listaTurnosNew) {
-                if (!listaTurnosOld.contains(listaTurnosNewTurno)) {
-                    Paciente oldPacienteOfListaTurnosNewTurno = listaTurnosNewTurno.getPaciente();
-                    listaTurnosNewTurno.setPaciente(paciente);
-                    listaTurnosNewTurno = em.merge(listaTurnosNewTurno);
-                    if (oldPacienteOfListaTurnosNewTurno != null && !oldPacienteOfListaTurnosNewTurno.equals(paciente)) {
-                        oldPacienteOfListaTurnosNewTurno.getListaTurnos().remove(listaTurnosNewTurno);
-                        oldPacienteOfListaTurnosNewTurno = em.merge(oldPacienteOfListaTurnosNewTurno);
-                    }
-                }
-            }
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 int id = paciente.getId();
@@ -148,32 +117,20 @@ public class PacienteJpaController implements Serializable {
         }
     }
 
-    public void destroy(int id) throws NonexistentEntityException, RollbackFailureException, Exception {
+   public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             Paciente paciente;
             try {
                 paciente = em.getReference(Paciente.class, id);
                 paciente.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The paciente with id " + id + " no longer exists.", enfe);
-            }
-            List<Turno> listaTurnos = paciente.getListaTurnos();
-            for (Turno listaTurnosTurno : listaTurnos) {
-                listaTurnosTurno.setPaciente(null);
-                listaTurnosTurno = em.merge(listaTurnosTurno);
+                throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
             }
             em.remove(paciente);
-            utx.commit();
-        } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            throw ex;
+            em.getTransaction().commit();
         } finally {
             if (em != null) {
                 em.close();

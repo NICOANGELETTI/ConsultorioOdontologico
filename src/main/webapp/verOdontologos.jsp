@@ -49,7 +49,7 @@
                         <td><%= odo.getApellido()%></td>
                         <td><%= odo.getEspecialidad()%></td>
                         <td style="display:flex;">
-                            <form name="eliminar" action="SvElimOdontogolos" method="POST">
+                            <form name="eliminar" action="SvElimOdontologos" method="POST">
                                 <button type="submit" class="btn btn-primary btn-user" style="background-color:red; margin-right:5px;">
                                     <i class="fas fa-trash-alt"></i>
                                     Eliminar

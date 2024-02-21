@@ -39,38 +39,13 @@ public class TurnoJpaController implements Serializable {
   public  TurnoJpaController(){
         emf = Persistence.createEntityManagerFactory("ConsultorioOdontologiaFinal_PU");
     }
-    public void create(Turno turno) throws RollbackFailureException, Exception {
+      public void create(Turno turno) {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
-            Odontologo odonto = turno.getOdonto();
-            if (odonto != null) {
-                odonto = em.getReference(odonto.getClass(), odonto.getId());
-                turno.setOdonto(odonto);
-            }
-            Paciente paciente = turno.getPaciente();
-            if (paciente != null) {
-                paciente = em.getReference(paciente.getClass(), paciente.getId());
-                turno.setPaciente(paciente);
-            }
+            em.getTransaction().begin();
             em.persist(turno);
-            if (odonto != null) {
-                odonto.getListaTurnos().add(turno);
-                odonto = em.merge(odonto);
-            }
-            if (paciente != null) {
-                paciente.getListaTurnos().add(turno);
-                paciente = em.merge(paciente);
-            }
-            utx.commit();
-        } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            throw ex;
+            em.getTransaction().commit();
         } finally {
             if (em != null) {
                 em.close();
@@ -78,48 +53,14 @@ public class TurnoJpaController implements Serializable {
         }
     }
 
-    public void edit(Turno turno) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Turno turno) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
-            Turno persistentTurno = em.find(Turno.class, turno.getId_turno());
-            Odontologo odontoOld = persistentTurno.getOdonto();
-            Odontologo odontoNew = turno.getOdonto();
-            Paciente pacienteOld = persistentTurno.getPaciente();
-            Paciente pacienteNew = turno.getPaciente();
-            if (odontoNew != null) {
-                odontoNew = em.getReference(odontoNew.getClass(), odontoNew.getId());
-                turno.setOdonto(odontoNew);
-            }
-            if (pacienteNew != null) {
-                pacienteNew = em.getReference(pacienteNew.getClass(), pacienteNew.getId());
-                turno.setPaciente(pacienteNew);
-            }
+            em.getTransaction().begin();
             turno = em.merge(turno);
-            if (odontoOld != null && !odontoOld.equals(odontoNew)) {
-                odontoOld.getListaTurnos().remove(turno);
-                odontoOld = em.merge(odontoOld);
-            }
-            if (odontoNew != null && !odontoNew.equals(odontoOld)) {
-                odontoNew.getListaTurnos().add(turno);
-                odontoNew = em.merge(odontoNew);
-            }
-            if (pacienteOld != null && !pacienteOld.equals(pacienteNew)) {
-                pacienteOld.getListaTurnos().remove(turno);
-                pacienteOld = em.merge(pacienteOld);
-            }
-            if (pacienteNew != null && !pacienteNew.equals(pacienteOld)) {
-                pacienteNew.getListaTurnos().add(turno);
-                pacienteNew = em.merge(pacienteNew);
-            }
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 int id = turno.getId_turno();
@@ -135,11 +76,11 @@ public class TurnoJpaController implements Serializable {
         }
     }
 
-    public void destroy(int id) throws NonexistentEntityException, RollbackFailureException, Exception {
+      public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             Turno turno;
             try {
                 turno = em.getReference(Turno.class, id);
@@ -147,32 +88,14 @@ public class TurnoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The turno with id " + id + " no longer exists.", enfe);
             }
-            Odontologo odonto = turno.getOdonto();
-            if (odonto != null) {
-                odonto.getListaTurnos().remove(turno);
-                odonto = em.merge(odonto);
-            }
-            Paciente paciente = turno.getPaciente();
-            if (paciente != null) {
-                paciente.getListaTurnos().remove(turno);
-                paciente = em.merge(paciente);
-            }
             em.remove(turno);
-            utx.commit();
-        } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            throw ex;
+            em.getTransaction().commit();
         } finally {
             if (em != null) {
                 em.close();
             }
         }
     }
-
     public List<Turno> findTurnoEntities() {
         return findTurnoEntities(true, -1, -1);
     }

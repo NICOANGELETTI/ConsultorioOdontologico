@@ -2,18 +2,23 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import logica.Controladora;
+import logica.Odontologo;
 
 
 @WebServlet(name = "SvEditOdontologos", urlPatterns = {"/SvEditOdontologos"})
 public class SvEditOdontologos extends HttpServlet {
 
  
+    
+    Controladora control = new Controladora();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -26,6 +31,19 @@ public class SvEditOdontologos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        int idOdonto = Integer.parseInt(request.getParameter("id"));
+        
+        Odontologo odontoEdit = control.traerOdontologo(idOdonto);
+        
+        HttpSession sesion = request.getSession();
+        
+        sesion.setAttribute("odontoEdit", odontoEdit);
+        response.sendRedirect("editarOdontologos.jsp");
+        
+        
+        
+        
     }
 
    
@@ -33,6 +51,24 @@ public class SvEditOdontologos extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String especialidad = request.getParameter("especialidad");
+  
+        Odontologo odo = (Odontologo)request.getSession().getAttribute("odontoEdit");
+        odo.setNombre(nombre);
+        odo.setApellido(apellido);
+        odo.setEspecialidad(especialidad);
+        
+        control.editarOdontologo(odo);
+        
+        response.sendRedirect("SvOdontologos");
+        
+        
+        
+        
+        
     }
 
     @Override

@@ -10,6 +10,7 @@ import logica.Paciente;
 import logica.Turno;
 import logica.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
+import persistencia.exceptions.RollbackFailureException;
 
 
 public class ControladoraPersistencia {
@@ -83,6 +84,29 @@ public class ControladoraPersistencia {
         return odoJPA.findOdontologo(id);
 
     }
+  
+   public void borrarOdontologo(int id) {
+      
+   
+        try {
+            odoJPA.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      
+           
+      
+    }
+
+   
+     public void editarOdontologo(Odontologo odo) {
+        try {
+            odoJPA.edit(odo);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
     
     //Metodos Paciente
     public void crearPaciente(Paciente paciente) {
@@ -100,6 +124,34 @@ public class ControladoraPersistencia {
 
         return paciJPA.findPaciente(id);
     }
+    
+    
+    public void borrarPaciente(int id) {
+      
+   
+        try {
+            paciJPA.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      
+           
+      
+    }
+    
+    
+    public void editarPaciente(Paciente paciente) {
+        try {
+            paciJPA.edit(paciente);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    
+    //Turnos
 
     public void crearTurno(Turno turno) {
         try {
@@ -110,6 +162,36 @@ public class ControladoraPersistencia {
         
     }
 
+    public List<Turno> traerTurnos() {
+
+        return turnoJPA.findTurnoEntities();
+    }
+
+    public void borrarTurno(int idTurno) {
+        try {
+            turnoJPA.destroy(idTurno);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Turno traerTurno(int idTurno) {
+
+       return turnoJPA.findTurno(idTurno);
+    }
+
+    public void editarTurno(Turno turno) {
+
+        try {
+            turnoJPA.edit(turno);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+  
+
+  
   
        
      
