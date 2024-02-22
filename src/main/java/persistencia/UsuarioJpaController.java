@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package persistencia;
 
 import java.io.Serializable;
@@ -16,12 +13,8 @@ import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 import logica.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
-import persistencia.exceptions.RollbackFailureException;
 
-/**
- *
- * @author nicoc
- */
+
 public class UsuarioJpaController implements Serializable {
 
     public UsuarioJpaController(UserTransaction utx, EntityManagerFactory emf) {

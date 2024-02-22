@@ -46,6 +46,8 @@ public class SvTurnos extends HttpServlet {
         
         HttpSession sesion = request.getSession();
         sesion.setAttribute("listaTurnos", listaTurnos);
+        
+        
         response.sendRedirect("verTurnos.jsp");
         
         

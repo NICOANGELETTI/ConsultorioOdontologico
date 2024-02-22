@@ -14,6 +14,6 @@
     <body>
         <h1>Hello World! Soy una Pagina de Error</h1>
         Necesitas estar logueado!!! Ingresa
-        <a href="loginError.jsp">Pagina Login</a>
+        <a href="login.jsp">Pagina Login</a>
     </body>
 </html>

@@ -7,6 +7,8 @@
 <%@ include file="Componentes/bodyPrimeraParte.jsp" %>
 
 
+
+
 <body class="bg-gradient-primary">
 
     <div class="container">
@@ -19,6 +21,12 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Alta Turnos</h1>
                             </div>
+
+                            <%    // Llamar a los servlets para obtener las listas de odontólogos y pacientes
+                                request.getRequestDispatcher("SvOdontologos").include(request, response);
+                                request.getRequestDispatcher("SvPacientes").include(request, response);
+                            %>
+
                             <form class="user" action="SvTurnos" method="POST">
                                 <div class="form-group">
                                     <input type="date" class="form-control form-control-user" name="fechaTurno" id="fechaTurno" placeholder="Fecha del Turno">

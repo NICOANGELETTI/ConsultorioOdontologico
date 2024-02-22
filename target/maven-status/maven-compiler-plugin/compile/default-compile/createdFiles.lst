@@ -1,5 +1,6 @@
 logica\Odontologo_.class
 logica\Usuario.class
+servlet\SvLogOut.class
 logica\Persona.class
 servlet\SvLogin.class
 logica\Secretario_.class
@@ -15,6 +16,7 @@ logica\Turno_.class
 persistencia\exceptions\PreexistingEntityException.class
 persistencia\ControladoraPersistencia.class
 persistencia\exceptions\IllegalOrphanException.class
+.netbeans_automatic_build
 servlet\SvUsuarios.class
 persistencia\SecretarioJpaController.class
 servlet\SvPacientes.class
