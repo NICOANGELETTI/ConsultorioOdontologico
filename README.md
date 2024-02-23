@@ -10,28 +10,22 @@
 
 <p>Puedes acceder al sistema utilizando las siguientes credenciales de prueba:</p>
 <ul>
-    <li><strong>Usuario:</strong> Admin</li>
-    <li><strong>Contraseña:</strong> 1234</li>
+    <li><strong>Usuario:</strong> Nicolas</li>
+    <li><strong>Contraseña:</strong> 12345</li>
 </ul>
 
 <p><strong>Nota:</strong> Debido a que se utiliza un servidor de pruebas (Clever Cloud), es posible que experimentes demoras en la carga de información. Por favor, ten paciencia.</p>
 
 ### Tecnologías Utilizadas 
 
-<ul>
-    <li><strong>Frontend:</strong> Se ha utilizado Bootstrap para la interfaz de usuario, junto con JSP para la estructura de las páginas.</li>
-    <li><strong>Backend:</strong> El backend se ha desarrollado utilizando Servlets para las diferentes funciones. Las principales tecnologías utilizadas son:
-        <ul>
-            <li>Java</li>
-            <li>Servlets</li>
-            <li>JPA (EclipseLink) para la persistencia</li>
-            <li>MySQL como base de datos</li>
-        </ul>
-    </li>
-    <li><strong>Arquitectura:</strong> Se sigue el patrón de diseño MVC (Modelo-Vista-Controlador) para organizar el proyecto en capas, principalmente las de Lógica y Persistencia.</li>
-    <li><strong>Base de Datos:</strong> Se utiliza MySQL a través del servicio de Clever Cloud para almacenar los datos del consultorio.</li>
-    <li><strong>Docker:</strong> La aplicación se ha dockerizado para facilitar su despliegue y ejecución en diferentes entornos.</li>
-</ul>
+### Tecnologías
+
+![Java](https://img.shields.io/badge/-Java-007396?style=flat&logo=java)
+![MySQL](https://img.shields.io/badge/-MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/-Bootstrap-563D7C?style=flat&logo=bootstrap)
+![HTML](https://img.shields.io/badge/-HTML-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/-CSS-1572B6?style=flat&logo=css3)
+
 
 ### Diagrama UML
 
