@@ -90,6 +90,6 @@ Una vez que NetBeans haya desplegado la aplicación en tu servidor de aplicacion
 
 ##Conctactame 
 
-<a href="https://www.linkedin.com/in/nicolas-angeletti/" ><img alt="LinkeIn" src="https://img.shields.io/badge/style=flat-square&logo=linkedin"></a>
+<a href="https://www.linkedin.com/in/nicolas-angeletti/" ><img alt="LinkeIn" src="https://img.shields.io/badge/LinkedIn?style=flat-square&logo=linkedin"></a>
 
 
