@@ -97,15 +97,16 @@ public class SvEditTurno extends HttpServlet {
         turno.setAfeccion(afeccion);
         turno.setOdonto(odo);
         turno.setPaciente(paci);
-       
+
         control.editarTurno(turno);
+        HttpSession sesion = request.getSession();
+        // Después de cada operación exitosa, establece un mensaje de alerta genérico en la sesión
+        sesion.setAttribute("mensajeAlerta", "Operación completada exitosamente.");
         response.sendRedirect("SvTurnos");
-        
-        
-        
+
     }
 
- 
+
     @Override
     public String getServletInfo() {
         return "Short description";

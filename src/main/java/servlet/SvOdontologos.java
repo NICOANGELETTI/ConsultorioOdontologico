@@ -63,10 +63,13 @@ public class SvOdontologos extends HttpServlet {
      
        
       
-      control.crearOdontologo(nombre , apellido , especialidad);
-        
-      response.sendRedirect("index.jsp");
-        
+      control.crearOdontologo(nombre, apellido, especialidad);
+
+        HttpSession sesion = request.getSession();
+        // Después de cada operación exitosa, establece un mensaje de alerta genérico en la sesión
+        sesion.setAttribute("mensajeAlerta", "Operación completada exitosamente.");
+        response.sendRedirect("index.jsp");
+
     }
 
     @Override

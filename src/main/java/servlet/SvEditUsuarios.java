@@ -52,14 +52,16 @@ public class SvEditUsuarios extends HttpServlet {
         usu.setNombreUsuario(nombre);
         usu.setPassword(password);
         usu.setRol(rol);
-        
+
         control.editarUsuario(usu);
-        
+        HttpSession sesion = request.getSession();
+        // Después de cada operación exitosa, establece un mensaje de alerta genérico en la sesión
+        sesion.setAttribute("mensajeAlerta", "Operación completada exitosamente.");
+
         //Redirigimos al servlet que muestra usuarios
         response.sendRedirect("SvUsuarios");
-        
-        
-        
+
+
     }
 
   

@@ -63,14 +63,15 @@ public class SvEditPacientes extends HttpServlet {
         paciente.setNombre(nombre);
         paciente.setApellido(apellido);
         paciente.setTiene_OS(valorObraSocial);
-        
-        
+
         control.editarPaciente(paciente);
+        HttpSession sesion = request.getSession();
+        // Después de cada operación exitosa, establece un mensaje de alerta genérico en la sesión
+        sesion.setAttribute("mensajeAlerta", "Operación completada exitosamente.");
         response.sendRedirect("SvPacientes");
-        
+
     }
 
-  
     @Override
     public String getServletInfo() {
         return "Short description";

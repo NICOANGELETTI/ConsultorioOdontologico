@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import logica.Controladora;
 
 
@@ -37,14 +38,13 @@ public class SvElimPacientes extends HttpServlet {
         
         int idPaciente = Integer.parseInt(request.getParameter("id"));
         
-       
-        
         control.borrarPaciente(idPaciente);
-        
+        HttpSession sesion = request.getSession();
+        // Después de cada operación exitosa, establece un mensaje de alerta genérico en la sesión
+        sesion.setAttribute("mensajeAlerta", "Operación completada exitosamente.");
         response.sendRedirect("SvPacientes");
     }
 
-   
     @Override
     public String getServletInfo() {
         return "Short description";

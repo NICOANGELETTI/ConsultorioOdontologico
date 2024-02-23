@@ -62,7 +62,9 @@ public class SvPacientes extends HttpServlet {
         }
 
         control.crearPaciente(nombre,apellido,tiene_OS);
-        
+         HttpSession sesion = request.getSession();
+        // Después de cada operación exitosa, establece un mensaje de alerta genérico en la sesión
+        sesion.setAttribute("mensajeAlerta", "Operación completada exitosamente.");
         response.sendRedirect("index.jsp");
       
     }

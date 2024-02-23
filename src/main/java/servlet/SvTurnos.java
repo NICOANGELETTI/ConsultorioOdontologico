@@ -97,6 +97,9 @@ public class SvTurnos extends HttpServlet {
 
         
         control.crearTurno(fechaTurno , horaTurno , afeccion , odo , paci);
+         HttpSession sesion = request.getSession();
+        // Después de cada operación exitosa, establece un mensaje de alerta genérico en la sesión
+        sesion.setAttribute("mensajeAlerta", "Operación completada exitosamente.");
         response.sendRedirect("index.jsp");
         
     }

@@ -55,16 +55,16 @@ public class SvUsuarios extends HttpServlet {
            processRequest(request, response);
 //Traigo los parametros
 String nombre = request.getParameter("nombre");
-String password = request.getParameter("password");
-String rol = request.getParameter("rol");
+        String password = request.getParameter("password");
+        String rol = request.getParameter("rol");
 
+        control.crearUsuario(nombre, password, rol);
+        HttpSession sesion = request.getSession();
+        // Después de cada operación exitosa, establece un mensaje de alerta genérico en la sesión
+        sesion.setAttribute("mensajeAlerta", "Operación completada exitosamente.");
+        response.sendRedirect("index.jsp");
 
-
-control.crearUsuario(nombre, password, rol);
-response.sendRedirect("index.jsp");
-   
-   
-}
+    }
 
 
 

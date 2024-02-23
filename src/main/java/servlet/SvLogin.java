@@ -48,14 +48,16 @@ public class SvLogin extends HttpServlet {
         validacion = control.validarIngreso(nombreUsuario,password);
         
         
-        if(validacion==true){
-          HttpSession sesion =  request.getSession(true);
-          sesion.setAttribute("nombreUsuario", nombreUsuario);
-          response.sendRedirect("index.jsp");
-          
-        }else{
-          response.sendRedirect("loginError.jsp");
-        }  
+        if (validacion == true) {
+            HttpSession sesion = request.getSession(true);
+            sesion.setAttribute("nombreUsuario", nombreUsuario);
+            sesion.setAttribute("mensajeAlerta", "Bienvenidos al Consultorio Odontologico");
+
+            response.sendRedirect("index.jsp");
+
+        } else {
+            response.sendRedirect("loginError.jsp");
+        }
 
   
 
