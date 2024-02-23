@@ -7,5 +7,11 @@ COPY target/ConsultorioOdontologiaFinal-1.0.war /usr/local/tomcat/webapps/
 # Puerto que expondrá la aplicación web
 EXPOSE 8080
 
+# Copiar el script de inicio personalizado dentro de la imagen Docker
+COPY ./startup.bat /usr/local/tomcat/bin/startup.bat
+
+# Dar permisos de ejecución al script de inicio
+RUN chmod +x /usr/local/tomcat/bin/startup.bat
+
 # Comando para ejecutar Tomcat (iniciará la aplicación web automáticamente)
-CMD ["startup.bat", "run"]
+CMD ["/usr/local/tomcat/bin/startup.bat", "run"]
