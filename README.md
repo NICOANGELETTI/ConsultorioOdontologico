@@ -1,35 +1,43 @@
-Consultorio Odontológico  java mysql bootstrap
-Descripción General
-El Consultorio Odontológico es un sistema diseñado para la administración eficiente de un consultorio dental. Está dirigido principalmente a secretarios administrativos y odontólogos, facilitando la carga de pacientes, tratamientos y asignaciones de turnos.
+CONSULTORIO ODONTOLÓGICO bootstrap java mysql docker
+Descripcion General:
+El proyecto consiste en un sistema para la administración de un Consultorio Odontológico. Está pensado principalmente para ser manejado por un secretario administrativo y los distintos odontólogos.
 
-Funcionalidades Principales
-Carga de Pacientes: Permite registrar información detallada de los pacientes, incluyendo datos personales y médicos.
-Asignación de Turnos: Facilita la programación y asignación de turnos para pacientes, gestionando horarios de atención.
-Sistema de Login: Incluye un sistema de autenticación para garantizar la seguridad y restringir el acceso según los roles de usuario.
-Uso
-La aplicación está disponible en la siguiente dirección: Consultorio Odontológico
+Permite básicamente la carga de pacientes, con sus respectivos datos, tratamientos, y asignaciones de turnos.
 
-Credenciales de Usuario de Prueba:
+Posee un sistema de login para seguridad.
 
-Usuario: Nicolas
-Contraseña: 1234
+Uso:
+La dirección de la app es: https://consultorio-odontologico.onrender.com/ConsultorioOdontologico-1.0-SNAPSHOT/login.jsp
 
+El usuario de prueba es:
 
-Tecnologías Utilizadas
-Frontend: Bootstrap, JSP
-Backend: Java, Servlets, JPA (EclipseLink)
-Base de Datos: MySQL
-
-Arquitectura
-El sistema sigue el patrón de diseño Modelo-Vista-Controlador (MVC), organizando la lógica de negocio y la presentación en capas separadas.
+Usuario: Admin
+Login: 1234
+IMPORTANTE: al usarse un servidor de pruebas (Clever Cloud) se debe tener paciencia en cuanto a la carga de información ya que puede tener demoras.
 
 Front:
 Se utiliza como base una plantilla confeccionada en Boostrap bootstrap , la cuál se le da una estructura de componentes para las distintas páginas. Se utiliza JSP.
 
-Base de Datos
-Se utiliza MySQL mysql  para la persistencia de datos, alojada en Clever Cloud.
+Back:
+El back se construye en base a Servlets para las distinas funciones. Las tecnologías usadas principalmente son:
 
-Diagrama UML
-Se adjunta un diagrama UML que representa las relaciones de clases del sistema.
+JAVA java
+Servlets
+Docker docker
+MySQL mysql
+JPA (EclipseLink)
+JSP
+Boostrap bootstrap
+Arquitectura:
+Se sigue el modelo MVC para trabajar por capas, principalmente las de Logica y Persistencia.
 
-Ver Diagrama UML
+Base de Datos:
+Utilización de MySQL mysql mediante el servicio de Clever Cloud.
+
+Docker docker :
+La app se dockerizó para su posterior despliegue.
+
+Diagrama UML:
+Se adjunta el diagrama UML donde se muestran las distintas relaciones de clases.
+
+https://drive.google.com/file/d/13NLkbEsxkjllju42LSSjwZ-1V499CiKj/view?usp=sharing
