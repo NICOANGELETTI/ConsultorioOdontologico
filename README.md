@@ -1,6 +1,7 @@
-<h1>Consultorio Odontológico   :smile: </h1>
+<h1>Consultorio Odontológico   :smile:  :rocket: </h1>
 
-<img src="https://consultorio-odontologico.onrender.com/ConsultorioOdontologico-1.0-SNAPSHOT/login.jsp" alt="Consultorio Odontológico">
+
+[![My Skills](https://skillicons.dev/icons?i=java,kotlin,nodejs,figma&theme=light)](https://skillicons.dev)
 
 <p>Este proyecto consiste en un sistema de gestión para un consultorio odontológico, diseñado para ser utilizado principalmente por un secretario administrativo y 
   los odontólogos del consultorio. Permite la administración de pacientes, sus datos, tratamientos y la asignación de turnos.</p>
