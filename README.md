@@ -1,4 +1,5 @@
-CONSULTORIO ODONTOLÓGICO bootstrap java mysql docker
+CONSULTORIO ODONTOLÓGICO bootstrap java mysql docker <i class="fab fa-github"></i>
+
 Descripcion General:
 El proyecto consiste en un sistema para la administración de un Consultorio Odontológico. Está pensado principalmente para ser manejado por un secretario administrativo y los distintos odontólogos.
 
