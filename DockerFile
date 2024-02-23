@@ -8,4 +8,4 @@ COPY target/ConsultorioOdontologiaFinal-1.0.war /usr/local/tomcat/webapps/
 EXPOSE 8080
 
 # Comando para ejecutar Tomcat (iniciará la aplicación web automáticamente)
-CMD ["startup.bat", "run"]
+CMD ["catalina.sh", "run"]
